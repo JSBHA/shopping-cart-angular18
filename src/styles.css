@@ -11,4 +11,8 @@ body{
     @apply bg-gray-900
 }
 
+.active{
+    text-color: green;
+}
+
 
