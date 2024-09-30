@@ -33,6 +33,7 @@ export class cartStateService{
             add: (state, action$: Observable<ProductItemcart>) =>
                 action$.pipe(map((product) => this.add(state, product))),
             remove: (state, action$: Observable<number>) => action$.pipe(map((id) => this.remove(state, id))),
+            udpate:(state, action$: Observable<ProductItemcart>) => action$.pipe(map((product)=> this.update(state,product)))
         },
 
         effects: (state) => ({
@@ -63,7 +64,17 @@ export class cartStateService{
 
     private remove(state: Signal<State>, id: number){
         return {
-              products: state().products.filter((product) => product.product.id !== id)
-        }
+              products: state().products.filter((product) => product.product.id !== id),
+        };
+    }
+    private update(state: Signal<State>, product:ProductItemcart){
+        const products = state().products.map((productInCart)=>{
+            if(productInCart.product.id === product.product.id){
+                return {...productInCart,quantity: product.quantity};
+            }
+            return productInCart;
+        })
+
+        return {products}
     }
 }
