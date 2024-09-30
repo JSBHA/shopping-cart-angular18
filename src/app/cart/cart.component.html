@@ -9,7 +9,11 @@
             @for (cartItem of state.products(); track cartItem.product.id){
               <app-cart-item class="block" 
               [productCartItem] = "cartItem"
-              (onRemove)="onRemove($event)" />
+              (onRemove)="onRemove($event)"
+              (onDecrease)="onDecrease($event)"
+              (onIncrease)="onIncrease($event)"
+              
+              />
             }
 
          
